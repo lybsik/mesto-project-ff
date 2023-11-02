@@ -14,7 +14,7 @@
 
 
 **Макет**
-[Ссылка на макет в GitHub](https://lybsik.github.io/mesto-project-ff/)
+[Ссылка на макет в GitHub](https://github.com/lybsik/mesto-project-ff.git)
 
 **Планы по доработке макета**
 Макет будет доработан в соответствии с требованиями 6 спринта моего обучения.
