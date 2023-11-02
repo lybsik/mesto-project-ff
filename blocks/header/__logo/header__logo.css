@@ -1,13 +1,18 @@
 .header__logo {
   width: 142px;
   height: 33px;
-  object-fit: contain;
+  margin: 0;
+  padding: 0 0 41px;
+  background-image: url(../../../images/logo-white.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 321px) {
   .header__logo {
-    width: 104px;
-    height: 24px;
-    margin: 0 0 0 7px;
+      width: 104px;
+      height: 25px;
+      margin-left: 27px;
+      padding: 0 0 31px;
   }
 }
