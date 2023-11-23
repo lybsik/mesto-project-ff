@@ -1,0 +1,25 @@
+.form__input {
+  width: 100%;
+  margin: 0;
+  padding: 12px 0 13px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  outline: none;
+}
+.form__input:last-of-type {
+  margin-bottom: 0;
+}
+.form__input:focus {
+  border: 1px solid lavender;
+}
+
+@media screen and (max-width: 321px) {
+  .form__input {
+      margin-bottom: 16px;
+      padding: 12px 0 9px;
+  }
+}
