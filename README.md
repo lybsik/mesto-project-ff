@@ -14,7 +14,11 @@
 
 
 **Макет**
+<<<<<<< HEAD
 [Ссылка на макет в GitHub](https://github.com/lybsik/mesto-project-ff)
+=======
+[Ссылка на макет в GitHub](https://github.com/lybsik/mesto-project-ff.git)
+>>>>>>> 5d299e42c7c094f81439ecdcd5f7721422974dfb
 
 **Планы по доработке макета**
 Макет будет доработан в соответствии с требованиями 7 спринта моего обучения.
