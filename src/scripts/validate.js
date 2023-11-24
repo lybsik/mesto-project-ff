@@ -1,3 +1,12 @@
+export const validationConfig = {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button-save',
+    inactiveButtonClass: 'form__button-save_disabled',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'popup__input-error_visible'
+  }; 
+
 export function enableValidation (config) {
     const showInputError = (form, input) => {
         input.classList.add(config.inputErrorClass)

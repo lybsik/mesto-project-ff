@@ -1,19 +1,12 @@
 import './pages/index.css';
-import {initialCards} from './scripts/initial-cards.js';
-import {enableValidation} from './scripts/validate.js';
-
-const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__button-save',
-  inactiveButtonClass: 'form__button-save_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'popup__input-error_visible'
-}; 
+import { initialCards } from './scripts/initial-cards.js';
+import { enableValidation, validationConfig } from './scripts/validate.js';
+import { createCard, popupPhoto } from './scripts/cards.js';
+import { openPopup, closePopup } from './scripts/modal.js';
 
 const popupEditProfile = document.querySelector('.popup_edit');
 const popupAddPlace = document.querySelector('.popup_place');
-const popupPhoto = document.querySelector('.popup-photo');
+
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const buttonCloseEditProfile = popupEditProfile.querySelector('.popup__close-button');
@@ -27,18 +20,15 @@ const aboutInput = document.querySelector('.profile__caption');
 const profileAddPlaceButton = document.querySelector('.profile__add-button');
 const buttonCloseAddPlace = popupAddPlace.querySelector('.popup__close-button');
 
-
 const formPlaceElement = document.querySelector('#form_place');
 const titleInput = formPlaceElement.querySelector('.form__input_type_title');
 const linkInput = formPlaceElement.querySelector('.form__input_type_link');
 const submitButton = formPlaceElement.querySelector('.form__button-save');
 
 const closeButtonPhotoPopup = document.querySelector('.popup-photo__close-button');
-const photo = popupPhoto.querySelector('.popup-photo__image');
-const title = popupPhoto.querySelector('.popup-photo__title');
+
 
 const cardsContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card').content; //создали переменную из template из которой нам нужен будет контент
 
 //вынесли отдельно появление карточки ПЕРЕД теми что уже есть на странице
 const renderCard = (card) => {
@@ -57,32 +47,14 @@ popupArray.forEach((item) => {
   item.addEventListener('click', (evt) => {closeByOverlay(evt)})
   })
 
-//функция закрытия при нажатии на ESCAPE
-function closeEscButton(evt) {
-  if (evt.key === "Escape") {
-    const popup = document.querySelector('.popup_opened')
-    closePopup(popup)
-  }
-}  
 
-//Функция открывания попапов
-function openPopup(popup) {
-  popup.classList.add('popup_opened'); /*Добавляется модификатор открытия со свойством видимости*/
-  document.addEventListener('keyup', closeEscButton);
-}
-
-//функция закрывания попапов
-function closePopup(popup) {
-  popup.classList.remove('popup_opened'); /*Удаляется модификатор открытия, попап становится снова невидимым*/
-  document.removeEventListener('keyup', closeEscButton);
-}
 
 //овeрлей на попапе
-function clickOverlay(evt) {
-  if (evt.target.classList.contains('popup_opened')) {
-    closePopup(evt.target)
-  }
-} 
+//function clickOverlay(evt) {
+//  if (evt.target.classList.contains('popup_opened')) {
+//    closePopup(evt.target)
+//  }
+//} 
 
 
 //функция открытия редактирования профиля
@@ -117,33 +89,6 @@ function handleSaveEditProfile(evt) {
 }
 
 formElementEditProfile.addEventListener('submit', handleSaveEditProfile); //наша форма для редактирования слышит как при сохранении запускается функция сохранения информации при редактировании профиля
-
-//функция создания новой карточки
-function createCard (cardData) {
-  const card = cardTemplate.querySelector('.cards__list-item').cloneNode(true);   //создали переменную выбрав из ранее созданной переменной нужный нам класс и клонируем его содержимое
-  const likeButton = card.querySelector('.cards__like-button');
-  const deleteButton = card.querySelector('.cards__delete-button');
-  const cardImage = card.querySelector('.cards__image');
-  const cardTitle = card.querySelector('.cards__title');
-  cardTitle.textContent = cardData.name;
-  cardImage.src =  cardData.link;
-  cardImage.alt = `Фотография ${cardTitle.textContent}`;
-
-  likeButton.addEventListener('click', function() { //кнопка лайка слушает как при клике на нее запускается функция:
-      likeButton.classList.toggle('cards__like-button_active'); //в которой переключается состояние нашего сердечка на активное
-  });
-  deleteButton.addEventListener('click', function() { //кнопка удаления прик клике запускает функцию:...
-      const element = deleteButton.closest('.cards__list-item'); //создадим переменную при которой корзина наша с классом
-      element.remove(); //...при которой наша переменная с карточкой удаляется
-  });
-  cardImage.addEventListener('click', function(){  //картинка слушает при клике вызывается функция, при которой:
-      openPopup(popupPhoto); //добавляется класс открывашки
-      photo.src = cardImage.src; //фото ищется в картимэдже
-      title.textContent = cardTitle.textContent; //заголовок ищется в заголовке
-      photo.alt = `Фотография ${title.textContent}`;
-  })
-  return(card); //возвращаем готовую карточку со всем что выше мы в нее положили
-}
 
 initialCards.forEach((item) => {
 const card = createCard(item);
