@@ -1,7 +1,7 @@
 import './pages/index.css';
 import { initialCards } from './scripts/cards.js';
 import { enableValidation } from './scripts/validate.js';
-import { createCard, popupPhoto, cardImageClickHandler } from './scripts/card.js';
+import { createCard, popupPhoto, photo, title } from './scripts/card.js';
 import { openPopup, closePopup, closeByOverlay } from './scripts/modal.js';
 
 const validationConfig = {
@@ -32,10 +32,7 @@ const formPlaceElement = document.querySelector('#form_place');
 const titleInput = formPlaceElement.querySelector('.form__input_type_title');
 const linkInput = formPlaceElement.querySelector('.form__input_type_link');
 const submitButton = formPlaceElement.querySelector('.form__button-save');
-
 const closeButtonPhotoPopup = document.querySelector('.popup-photo__close-button');
-
-
 const cardsContainer = document.querySelector('.cards');
 
 //вынесли отдельно появление карточки ПЕРЕД теми что уже есть на странице
@@ -61,7 +58,6 @@ function openAddPlacePopup() {
   submitButton.classList.add('form__button-save_disabled');
   submitButton.disabled = true;
   openPopup(popupAddPlace);
-  
 }
 
 profileEditButton.addEventListener('click', () => {openEditProfilePopup()}); /*кнопка редактирования слышит как при нажатии на нее запускается Функция редактирования профиля*/
@@ -80,15 +76,30 @@ function handleSaveEditProfile(evt) {
 
 formElementEditProfile.addEventListener('submit', handleSaveEditProfile); //наша форма для редактирования слышит как при сохранении запускается функция сохранения информации при редактировании профиля
 
+const likeHandler = (likeButton) => {
+  likeButton.classList.toggle('cards__like-button_active');
+}
+
+const deleteHandler = (element) => { 
+  element.remove();  
+};
+
+function cardImageClickHandler(cardData) {
+  openPopup(popupPhoto);
+  photo.src = cardData.link;
+  title.textContent = cardData.name;
+  photo.alt = `Фотография ${title.textContent}`;
+};
+
 initialCards.forEach((item) => {
-const card = createCard(item, cardImageClickHandler);
+const card = createCard(item, likeHandler, deleteHandler, cardImageClickHandler);
 renderCard(card); //объявляем переменную карточки появляющуся ПЕРЕД всеми остальными из массива
 })
 //функция сохранения новой карточки
 function handleSaveCreateCard(evt) {
   evt.preventDefault();
   const newCardData = {name: titleInput.value, link: linkInput.value};
-  const newCard = createCard(newCardData)
+  const newCard = createCard(newCardData, likeHandler, deleteHandler, cardImageClickHandler);
   renderCard(newCard);
   closePopup(popupAddPlace);
 }
