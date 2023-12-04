@@ -11,13 +11,21 @@ export function enableValidation (config) {
         span.textContent = ''
         span.classList.remove(config.errorClass)
     }
+    
     const isValid = (form, input) => {
-        if (!input.validity.valid) {
-            showInputError(form, input)
-        } else {
-            hideInputError(form, input)
-        }
-    }
+        if (input.validity.patternMismatch) {
+           input.setCustomValidity("Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы");
+      } else {
+        input.setCustomValidity("");
+      }
+    
+      if (!input.validity.valid) {
+        showInputError(form, input);
+      } else {
+        hideInputError(form, input);
+      }
+    }; 
+
     const hasInvalidValue = (inputs) => {
         return inputs.some(input => !input.validity.valid)
         }

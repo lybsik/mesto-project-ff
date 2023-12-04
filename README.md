@@ -15,9 +15,9 @@
 
 **Макет**
 <<<<<<< HEAD
-[Ссылка на макет в GitHub](https://github.com/lybsik/mesto-project-ff)
+[Ссылка на макет в GitHub](https://lybsik.github.io/mesto-project-ff/)
 =======
-[Ссылка на макет в GitHub](https://github.com/lybsik/mesto-project-ff.git)
+[Ссылка на макет в GitHub](https://lybsik.github.io/mesto-project-ff/)
 >>>>>>> 5d299e42c7c094f81439ecdcd5f7721422974dfb
 
 **Планы по доработке макета**

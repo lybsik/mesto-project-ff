@@ -4,14 +4,14 @@ import { enableValidation } from './scripts/validate.js';
 import { createCard, popupPhoto, photo, title } from './scripts/card.js';
 import { openPopup, closePopup, closeByOverlay } from './scripts/modal.js';
 
-const validationConfig = {
+/*const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__button-save',
   inactiveButtonClass: 'form__button-save_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'popup__input-error_visible'
-};
+};*/
 
 const popupEditProfile = document.querySelector('.popup_edit');
 const popupAddPlace = document.querySelector('.popup_place');
@@ -106,4 +106,11 @@ function handleSaveCreateCard(evt) {
 
 formPlaceElement.addEventListener('submit', handleSaveCreateCard); //наша форма создания новой краточки слышит как при сохранении запускается функция созданная выше
 
-enableValidation(validationConfig);
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
