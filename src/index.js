@@ -107,10 +107,10 @@ function handleSaveCreateCard(evt) {
 formPlaceElement.addEventListener('submit', handleSaveCreateCard); //наша форма создания новой краточки слышит как при сохранении запускается функция созданная выше
 
 enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__button-save',
+  inactiveButtonClass: 'form__button-save_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'popup__input-error_visible'
 });
