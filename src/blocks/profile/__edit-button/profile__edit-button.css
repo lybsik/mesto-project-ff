@@ -4,6 +4,7 @@
   width: 24px;
   height: 24px;
   background-color: transparent;
+  background-size: 50%;
   background-image: url("../../../images/Vector.svg");
   background-position: 50% 50%;
   background-repeat: no-repeat;
