@@ -11,7 +11,7 @@ function createCard (cardData, userId, likeHandler, deleteHandler, cardImageClic
     const cardElement = cardTemplate.querySelector('.cards__list-item').cloneNode(true);   
     const likeButton = cardElement.querySelector('.cards__like-button');
     const deleteButton = cardElement.querySelector('.cards__delete-button');
-    const cardLikeCount = cardElement.querySelector(".cards__like-count");
+    const cardLikeCount = cardElement.querySelector('.cards__like-counter');
     const cardImage = cardElement.querySelector('.cards__image');
     const cardTitle = cardElement.querySelector('.cards__title');
     cardTitle.textContent = cardData.name;
@@ -26,22 +26,24 @@ function createCard (cardData, userId, likeHandler, deleteHandler, cardImageClic
     //Проверка лайка
     const checkLike = cardData.likes.some((like) => like._id === userId);
     if (checkLike) {
-      likeButton.classList.add('cards__like-button_active')
+      likeButton.classList.add("cards__like-button_active")
     }
     //Ставим лайк при нажатии на кнопку
-    likeButton.addEventListener('click', () => {
-        likeHandler(likeButton);
-    });
+    likeButton.addEventListener('click', (evt) => {likeHandler(evt, cardData._id, cardElement)});
+    
+    //Открываем картинку карточки при клике
+    cardImage.addEventListener('click', () => {
+      cardImageClickHandler(cardData.link, cardData.name)});
 
     /*deleteButton.addEventListener('click', function() {
         const element = deleteButton.closest('.cards__list-item');
         deleteHandler(element);         
-      });*/
+      });
     
     //Открытие карточки
     cardImage.addEventListener('click', function() {
         cardImageClickHandler(cardData);
-    });
+    });*/
 
     return(cardElement); 
 }
@@ -56,17 +58,17 @@ function deleteHandler(cardId, cardElement) {
   //Функция постановки лайка      
   function likeHandler(evt, cardId, cardElement) {
     const counterLikes = cardElement.querySelector('.cards__like-counter')
-    if (evt.target.classList.contains('cards__like-button_active')) {
+    if (evt.target.classList.contains("cards__like-button_active")) {
         deleteLike(cardId)
       .then((card) => {
-        evt.target.classList.remove('cards__like-button_active');
+        evt.target.classList.remove("cards__like-button_active");
         counterLikes.textContent = card.likes.length;
       })
       .catch((err) => {console.log(err)}); 
     } else {
       setLike(cardId)
       .then((card) => {
-        evt.target.classList.add('cards__like-button_active');
+        evt.target.classList.add("cards__like-button_active");
         counterLikes.textContent = card.likes.length;
       })
       .catch((err) => {console.log(err)});

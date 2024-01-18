@@ -163,10 +163,10 @@ profileAddPlaceButton.addEventListener('click', function() {
   formPlaceElement.addEventListener('submit', getNewCard);
 
 //Увеличение карточки
-function cardImageClickHandler(cardData) {
+function cardImageClickHandler(cardImageLink, cardImageName) {
     openPopup(popupPhoto);
-    photo.src = cardData.link;
-    title.textContent = cardData.name;
+    photo.src = cardImageLink;
+    title.textContent = cardImageName;
     photo.alt = `Фотография ${title.textContent}`;
 }
   
