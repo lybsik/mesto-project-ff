@@ -18,3 +18,9 @@ function closeEscButton(evt) {
   }
 }
 
+//функция закрытия попапа через оверлей
+export function closeByOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target)
+  }
+} 

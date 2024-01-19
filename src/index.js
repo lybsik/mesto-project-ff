@@ -1,7 +1,7 @@
 import "./pages/index.css";
 import { enableValidation, clearValidation } from "./scripts/validation.js";
 import { createCard, deleteHandler, likeHandler, popupPhoto, photo, title } from "./scripts/card.js";
-import { openPopup, closePopup } from "./scripts/modal.js";
+import { openPopup, closePopup, closeByOverlay } from "./scripts/modal.js";
 import { getInitialInfo, updateUserInfo, postNewCard, updateUserAvatar } from "./scripts/api.js";
 
 let userId;
@@ -72,7 +72,7 @@ profileEditButton.addEventListener("click", function () {
     popupNameInput.value = nameInput.textContent;
     popupAboutInput.value = aboutInput.textContent;
 });
-function handleFormSubmit(evt) {
+function handleSaveEditProfile(evt) {
     submitButtonEditProfile.textContent = submitButtonEditProfile.getAttribute("data-loading");
     evt.preventDefault();
     updateUserInfo({
@@ -90,7 +90,7 @@ function handleFormSubmit(evt) {
             submitButtonEditProfile.textContent = submitButtonEditProfile.getAttribute("data-default-text");
         });
 }
-formElementEditProfile.addEventListener("submit", handleFormSubmit);
+formElementEditProfile.addEventListener("submit", handleSaveEditProfile);
 
 //Добавление карточки
 profileAddPlaceButton.addEventListener("click", function () {
@@ -105,8 +105,7 @@ function getNewCard(evt) {
         .then((cardData) => {
             const newCard = createCard(cardData, userId, deleteHandler, likeHandler, cardImageClickHandler);
             cardList.prepend(newCard);
-            titleInput.value = "";
-            linkInput.value = "";
+            formPlaceElement.reset();
             closePopup(popupAddPlace);
         })
         .catch((err) => {
@@ -131,9 +130,7 @@ document.querySelectorAll(".popup__close-button").forEach((button) => {
     const buttonsPopup = button.closest(".popup");
     button.addEventListener("click", () => closePopup(buttonsPopup));
     buttonsPopup.addEventListener("mousedown", (evt) => {
-        if (evt.target === evt.currentTarget) {
-            closePopup(buttonsPopup);
-        }
+        closeByOverlay(evt)
     });
 });
 
