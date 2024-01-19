@@ -24,7 +24,7 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
 
 const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
     if (inputElement.validity.patternMismatch) {
-        inputElement.setCustomValidity("Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы");
+        inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
         inputElement.setCustomValidity("");
     }
@@ -41,10 +41,14 @@ const hasInvalidValue = (inputList) => {
     });
 };
 
+const disableSubmitButton = (buttonElement, inactiveButtonClass) => {
+    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.disabled = true;
+};
+
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
     if (hasInvalidValue(inputList)) {
-        buttonElement.classList.add(inactiveButtonClass);
-        buttonElement.disabled = true;
+        disableSubmitButton(buttonElement, inactiveButtonClass);
     } else {
         buttonElement.classList.remove(inactiveButtonClass);
         buttonElement.disabled = false;
@@ -66,7 +70,7 @@ const setEventListeners = (formElement, inputSelector, inputErrorClass, errorCla
 export const clearValidation = (formElement, validationConfig) => {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
     const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
-    buttonElement.classList.add(validationConfig.inactiveButtonClass);
+    disableSubmitButton(buttonElement, validationConfig.inactiveButtonClass);
     inputList.forEach((inputElement) => {
         hideInputError(formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
         inputElement.setCustomValidity("");

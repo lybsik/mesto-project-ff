@@ -36,9 +36,31 @@
                 <button type="button" class="popup__close-button" aria-label="закрыть"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="profile" class="form" id="form_edit" novalidate>
-                    <input name="name" id="name" class="form__input form__input_type_name" type="text" placeholder="Имя" required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" />
+                    <input 
+                    name="name" 
+                    id="name" 
+                    class="form__input form__input_type_name" 
+                    type="text" 
+                    placeholder="Имя" 
+                    required 
+                    minlength="2" 
+                    maxlength="40" 
+                    pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" 
+                    data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                    />
                     <span class="name-error popup__input-error"></span>
-                    <input name="about" id="about" class="form__input form__input_type_about" type="text" placeholder="О себе" required minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" />
+                    <input 
+                    name="about" 
+                    id="about" 
+                    class="form__input form__input_type_about" 
+                    type="text" 
+                    placeholder="О себе" 
+                    required 
+                    minlength="2" 
+                    maxlength="200" 
+                    pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$"
+                    data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
+                    />
                     <span class="about-error popup__input-error"></span>
                     <button type="submit" class="form__button-save" data-loading="Сохранение..." data-default-text="Сохранить">Сохранить</button>
                 </form>
@@ -50,7 +72,14 @@
                 <button type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Обновить аватар</h2>
                 <form class="form" name="edit-avatar" novalidate>
-                    <input class="form__input form__input_type_link" type="url" name="link" id="link" placeholder="Ссылка на картинку" required />
+                    <input 
+                    class="form__input form__input_type_link" 
+                    type="url" 
+                    name="link" 
+                    id="link" 
+                    placeholder="Ссылка на картинку" 
+                    required 
+                    />
                     <span class="link-error popup__input-error"></span>
                     <button type="submit" class="form__button-save" data-loading="Сохранение..." data-default-text="Сохранить">Сохранить</button>
                 </form>
@@ -62,9 +91,27 @@
                 <button type="button" class="popup__close-button" aria-label="закрыть"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form name="newplace" class="form" id="form_place" novalidate>
-                    <input name="title" id="title" class="form__input form__input_type_title" type="text" required minlength="2" maxlength="30" placeholder="Название" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" />
+                    <input 
+                    name="title" 
+                    id="title" 
+                    class="form__input form__input_type_title" 
+                    type="text" 
+                    required 
+                    minlength="2" 
+                    maxlength="30" 
+                    placeholder="Название" 
+                    pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" 
+                    data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                    />
                     <span class="title-error popup__input-error"></span>
-                    <input name="link" id="link" class="form__input form__input_type_link" type="url" required placeholder="Ссылка на картинку" />
+                    <input 
+                    name="link" 
+                    id="link" 
+                    class="form__input form__input_type_link" 
+                    type="url" 
+                    required 
+                    placeholder="Ссылка на картинку" 
+                    />
                     <span class="link-error popup__input-error"></span>
                     <button type="submit" class="form__button-save" data-loading="Сохранение..." data-default-text="Создать">Создать</button>
                 </form>

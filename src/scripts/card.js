@@ -57,25 +57,13 @@ function deleteHandler(cardId, cardElement) {
 //Функция постановки лайка
 function likeHandler(evt, cardId, cardElement) {
     const counterLikes = cardElement.querySelector(".cards__like-counter");
-    if (evt.target.classList.contains("cards__like-button_active")) {
-        deleteLike(cardId)
+    const likeMethod = evt.target.classList.contains("cards__like-button_active") ? deleteLike: setLike;
+    likeMethod(cardId) 
             .then((card) => {
-                evt.target.classList.remove("cards__like-button_active");
-                counterLikes.textContent = card.likes.length;
+               evt.target.classList.toggle("cards__like-button_active"); 
+               counterLikes.textContent = card.likes.length;  
             })
-            .catch((err) => {
-                console.log(err);
-            });
-    } else {
-        setLike(cardId)
-            .then((card) => {
-                evt.target.classList.add("cards__like-button_active");
-                counterLikes.textContent = card.likes.length;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
+    .catch(err => console.log(err));
 }
 
 //Экспорт функций создания карточки, удаление и постановки лайка
